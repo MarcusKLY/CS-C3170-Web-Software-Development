@@ -11,4 +11,5 @@ app.get("/", (c) => {
   return c.text(`Store: ${getStore()}`);
 });
 
-export default app;
+// export default app;
+Deno.serve(app.fetch);

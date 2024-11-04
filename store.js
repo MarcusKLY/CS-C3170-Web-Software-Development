@@ -2,8 +2,6 @@ let store = 0;
 
 const setStore = (s) => store = s;
 
-export function	getStore() {
-		return store;
-}
+const getStore = () => store;
 
-export { setStore };
+export { setStore, getStore };
