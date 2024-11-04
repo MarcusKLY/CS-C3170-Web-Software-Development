@@ -5,11 +5,11 @@ const app = new Hono();
 let count = 3;
 
 app.get("/", (c) => {
-  count--;
   if (count === 0) {
     return c.text("Kaboom!");
   } else {
     return c.text(count.toString());
+				count--;
   }
 });
 
