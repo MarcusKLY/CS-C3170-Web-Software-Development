@@ -2,8 +2,16 @@ import { Hono } from "https://deno.land/x/hono@v3.12.11/mod.ts";
 
 const app = new Hono();
 
-let count = 0;
+let count = 3;
 
-app.get("/", (c) => c.text(count));
+app.get("/", (c) => {
+  if (count === 0) {
+    return c.text("Kaboom!");
+  } else {
+    const temp = count;
+    count--;
+    return c.text(temp.toString());
+  }
+});
 
-Deno.serve(app.fetch);
+export default app;
