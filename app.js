@@ -6,9 +6,11 @@ let count = 3;
 
 app.get("/", (c) => {
   count--;
-		if (count === 0) {
-			c.text("Kaboom!");
-			return;
-		} });
+  if (count === 0) {
+    return c.text("Kaboom!");
+  } else {
+    return c.text(count.toString());
+  }
+});
 
 Deno.serve(app.fetch);
