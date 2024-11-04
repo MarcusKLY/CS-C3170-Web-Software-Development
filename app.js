@@ -8,8 +8,10 @@ app.get("/", (c) => {
   if (count === 0) {
     return c.text("Kaboom!");
   } else {
-    return c.text(count.toString());
-				count--;
+    temp = count
+    count--;
+    return c.text(temp.toString());
+
   }
 });
 
