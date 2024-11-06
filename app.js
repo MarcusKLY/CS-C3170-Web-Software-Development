@@ -9,9 +9,13 @@ app.get("/", (c) => {
   return c.html(eta.render("index.eta"));
 });
 
-app.post("/songs", (c) => {
-    
+app.post("/songs", async (c) => {
+    const name = await c.req.param("name");
+    const duration = await c.req.param("duration");
+    addSong(name, parseInt(duration, 10));
+    return c.redirect("/");
 });
+
 
 // export default app;
 Deno.serve(app.fetch);
