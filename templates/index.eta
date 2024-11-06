@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Songs and durations!</title>
-  </head>
-  <body>
+</head>
+<body>
     <h1>Songs</h1>
-    <!-- add a form for adding songs here -->
     <form method="POST" action="/songs">
-        <lable for="name">Song name:</lable>
+        <label for="name">Song name:</label>
         <input type="text" name="name" id="name" required>
         <br/>
-        <lable for="duration">Song duration:</lable>
+        <label for="duration">Song duration (seconds):</label>
         <input type="text" name="duration" id="duration" required>
         <br/>
-    <table>
-      <tr>
-        <th>Song name</th>
-        <th>Duration (seconds)</th>
-      </tr>
-      <!-- songs from the server should be listed here -->
+        <input type="submit" value="Add Song">
+    </form>
+
+    <h2>Song List</h2>
+    <table border="1">
+        <tr>
+            <th>Song name</th>
+            <th>Duration (seconds)</th>
+        </tr>
+        <% for (let song of songs) { %>
+        <tr>
+            <td><%= song.name %></td>
+            <td><%= song.duration %></td>
+        </tr>
+        <% } %>
     </table>
-  </body>
+</body>
 </html>
