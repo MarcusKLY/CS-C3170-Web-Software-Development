@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Songs and durations!</title>
+  </head>
+  <body>
+    <h1>Songs</h1>
+    <!-- add a form for adding songs here -->
+    <form method="POST" action="/songs">
+        <lable for="name">Song name:</lable>
+        <input type="text" name="name" id="name" required>
+        <br/>
+        <lable for="duration">Song duration:</lable>
+        <input type="text" name="duration" id="duration" required>
+        <br/>
+    <table>
+      <tr>
+        <th>Song name</th>
+        <th>Duration (seconds)</th>
+      </tr>
+      <!-- songs from the server should be listed here -->
+    </table>
+  </body>
+</html>
