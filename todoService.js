@@ -29,4 +29,9 @@ const updateTodo = async (id, todo) => {
   await kv.set(["todos", id], todo);
 }
 
-export { createTodo, listTodos, getTodo, updateTodo };
+const deleteTodo = async (id) => {
+		const kv = await Deno.openKv();
+		await kv.delete(["todos", id]);
+};
+
+export { createTodo, listTodos, getTodo, updateTodo, deleteTodo };

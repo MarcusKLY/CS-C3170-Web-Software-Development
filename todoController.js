@@ -29,5 +29,10 @@ const updateTodo = async (c) => {
 		return c.redirect(`/todos/${id}`);
 };
 
+const deleteTodo = async (c) => {
+		const id = c.req.param("id");
+		await todoService.deleteTodo(id);
+		return c.redirect("/todos");
+};
 
-export { createTodo, showForm, showTodo, updateTodo };
+export { createTodo, showForm, showTodo, updateTodo, deleteTodo };
