@@ -15,4 +15,9 @@ const createTodo = async (c) => {
   return c.redirect("/todos");
 };
 
-export { createTodo, showForm };
+const showTodo = async (c) => {
+		const id = c.req.param("id");
+		return c.text("Asking for a todo with id " + id);
+}
+
+export { createTodo, showForm, showTodo };

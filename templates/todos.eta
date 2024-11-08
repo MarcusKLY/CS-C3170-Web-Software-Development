@@ -13,7 +13,7 @@
     <p>Existing todos:</p>
     <ul>
     <% it.todos.forEach((todo) => { %>
-      <li><%= todo.todo %></li>
+      <li><a href="/todos/<%= todo.id %>"><%= todo.todo %></a></li>
     <% }); %>
     </ul>
   </body>
