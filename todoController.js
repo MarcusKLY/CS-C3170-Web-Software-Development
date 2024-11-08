@@ -16,8 +16,11 @@ const createTodo = async (c) => {
 };
 
 const showTodo = async (c) => {
-		const id = c.req.param("id");
-		return c.text("Asking for a todo with id " + id);
-}
+  const id = c.req.param("id");
+		return c.html(
+			eta.render("todo.eta", { todo: await todoService.getTodo(id) }),
+		);
+};
+
 
 export { createTodo, showForm, showTodo };
