@@ -4,4 +4,10 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const showForm = (c) => c.html(eta.render("todos.eta"));
 
-export { showForm };
+const createTodo = async (c) => {
+  const body = await c.req.parseBody();
+  conmsole.log(body);
+  return c.redirect("/todos");
+};
+
+export { showForm, createTodo };
