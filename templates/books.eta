@@ -6,7 +6,11 @@
   <body>
     <p>Add a book:</p>
     <form method="POST" action="/books">
-      <label for="book">book:</label>
+      <label for="book">Book name:</label>
+      <input type="text" id="book" name="book" /><br/>
+      <label for="pages">Number of pages:</label>
+      <input type="text" id="book" name="book" /><br/>
+      <label for="isbn">ISBN:</label>
       <input type="text" id="book" name="book" /><br/>
       <input type="submit" value="Add" />
     </form>
