@@ -11,7 +11,7 @@
       <label for="pages">Number of pages:</label>
       <input type="text" id="pages" name="pages" /><br/>
       <label for="isbn">ISBN:</label>
-      <input type="text" id="book" name="book" /><br/>
+      <input type="text" id="isbn" name="isbn" /><br/>
       <input type="submit" value="Add" />
     </form>
     <p>Existing books:</p>
