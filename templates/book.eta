@@ -5,8 +5,12 @@
   </head>
   <body>
     <form method="POST" action="/books/<%= it.book.id %>">
-      <label for="book">Book:</label>
-      <input type="text" id="book" name="book" value="<%= it.book.book %>" /><br/>
+      <label for="pages">Book name:</label>
+      <input type="text" id="pages" name="pages" value="<%= it.book.pages %>" /><br/>
+      <label for="pages">Number of pages:</label>
+      <input type="text" id="pages" name="pages" value="<%= it.book.pages %>" /><br/>
+      <label for="isbn">ISBN:</label>
+      <input type="text" id="isbn" name="isbn" value="<%= it.book.isbn %>" /><br/>
       <input type="submit" value="Update book" />
     </form>
     
