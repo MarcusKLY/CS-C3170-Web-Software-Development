@@ -6,7 +6,7 @@ const showForm = (c) => c.html(eta.render("todos.eta"));
 
 const createTodo = async (c) => {
   const body = await c.req.parseBody();
-  conmsole.log(body);
+  console.log(body);
   return c.redirect("/todos");
 };
 
