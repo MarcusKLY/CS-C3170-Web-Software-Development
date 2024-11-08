@@ -6,5 +6,6 @@ const app = new Hono();
 app.get("/todos", todoController.showForm);
 app.get("/todos/:id", todoController.showTodo);
 app.post("/todos", todoController.createTodo);
+app.post("/todos/:id", todoController.updateTodo);
 
 Deno.serve(app.fetch);

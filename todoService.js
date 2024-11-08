@@ -23,4 +23,10 @@ const getTodo = async (id) => {
   return todo?.value ?? {};
 };
 
-export { createTodo, listTodos, getTodo };
+const updateTodo = async (id, todo) => {
+  todo.id = id;
+  const kv = await Deno.openKv();
+  await kv.set(["todos", id], todo);
+}
+
+export { createTodo, listTodos, getTodo, updateTodo };

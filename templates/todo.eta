@@ -4,8 +4,12 @@
     <title>TODO</title>
   </head>
   <body>
-    <p>Todo:</p>
-    <p><%= it.todo.todo %></p>
+    <form method="POST" action="/todos/<%= it.todo.id %>">
+      <label for="todo">Todo:</label>
+      <input type="text" id="todo" name="todo" value="<%= it.todo.todo %>" /><br/>
+      <input type="submit" value="Update todo" />
+    </form>
+    
     <p><a href="/todos">Back to todos</a></p>
   </body>
 </html>
