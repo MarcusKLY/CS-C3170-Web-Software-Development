@@ -9,4 +9,4 @@ app.post("/todos", todoController.createTodo);
 app.post("/todos/:id", todoController.updateTodo);
 app.post("/todos/:id/delete", todoController.deleteTodo);
 
-Deno.serve(app.fetch);
+export default app;
