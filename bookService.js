@@ -34,4 +34,4 @@ const deleteTodo = async (id) => {
 		await kv.delete(["books", id]);
 };
 
-export { createTodo, getTodo, updateTodo, deleteTodo };
+export { createTodo, getTodo, updateTodo, deleteTodo, listTodos };
