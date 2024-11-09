@@ -9,4 +9,10 @@ const showForm = async (c) => {
   );
 };
 
+const createSong = async (c) => {
+		const body = await c.req.parseBody();
+		await songService.createSong(body);
+		return c.redirect("/");
+}
+
 export	{ showForm };

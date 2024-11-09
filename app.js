@@ -5,6 +5,7 @@ import	* as songController from "./songController.js";
 const app = new Hono();
 
 app.get("/", songController.showForm);
+app.post("/songs", songController.createSong);
 
 app.get("/books", todoController.showForm);
 app.get("/books/:id", todoController.showTodo);

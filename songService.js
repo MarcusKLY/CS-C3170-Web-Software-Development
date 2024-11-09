@@ -10,4 +10,11 @@ const listSongs = async () => {
   return songs;
 };
 
-export { listSongs };
+const createSong	= async (song) => {
+		song.id = crypto.randomUUID();
+
+		const kv = await Deno.openKv();
+		await kv.set(["songs", song.id], song);
+};
+
+export { listSongs,	createSong };
