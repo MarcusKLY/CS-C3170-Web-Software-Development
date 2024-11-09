@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>book</title>
+    <title>Songs and durations!</title>
   </head>
   <body>
-    <p>Add a book:</p>
-    <form method="POST" action="/books">
-      <label for="name">Book name:</label>
-      <input type="text" id="name" name="name" /><br/>
-      <label for="pages">Number of pages:</label>
-      <input type="text" id="pages" name="pages" /><br/>
-      <label for="isbn">ISBN:</label>
-      <input type="text" id="isbn" name="isbn" /><br/>
-      <input type="submit" value="Add" />
+    <h1>Songs</h1>
+    <!-- add a form for adding songs here -->
+    <form method="POST" action="/songs">
+      <label for="name">Song name</label>
+      <input type="text" id="name" name="name" value="<%= it.song.name %>" /><br/>
+      <label for="duration">Song duration</label>
+      <input type="text" id="duration" name="duration" value="<%= it.song.duration %>" /><br/>
+      <button type="submit">Add Song</button>
     </form>
-    <p>Existing books:</p>
-    <ul>
-    <% it.books.forEach((book) => { %>
-      <li>
-        <a href="/books/<%= book.id %>"><%= book.name %></a>
-        <form method="POST" action="/books/<%= book.id %>/delete">
-          <input type="submit" value="Delete" />
-        </form>
-      </li>
-    <% }); %>
-    </ul>
+    <table>
+      <tr>
+        <th>Song name</th>
+        <th>Duration (seconds)</th>
+      </tr>
+      <!-- songs from the server should be listed here -->
+      <% it.songs.forEach((song) => { %>
+        <tr>
+          <td><%= song.name %></td>
+          <td><%= song.duration %></td>
+        </tr>
+      <% }); %>
+    </table>
   </body>
 </html>
