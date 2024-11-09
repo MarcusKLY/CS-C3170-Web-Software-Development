@@ -1,12 +1,11 @@
 import { Eta } from "https://deno.land/x/eta@v3.4.0/src/index.ts";
 import * as todoService from "./bookService.js";
-import * as songService from "./songService.js";
 
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const showForm = async (c) => {
   return c.html(
-    eta.render("books.eta", { books: await todoService.listTodos() }),
+    eta.render("index.eta", { books: await todoService.listTodos() }),
   );
 };
 
