@@ -8,9 +8,9 @@
     <!-- add a form for adding songs here -->
     <form method="POST" action="/songs">
       <label for="name">Song name</label>
-      <input type="text" id="name" name="name" value="<%= it.song.name %>" /><br/>
+      <input type="text" id="name" name="name" /><br/>
       <label for="duration">Song duration</label>
-      <input type="text" id="duration" name="duration" value="<%= it.song.duration %>" /><br/>
+      <input type="text" id="duration" name="duration" /><br/>
       <button type="submit">Add Song</button>
     </form>
     <table>

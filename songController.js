@@ -4,6 +4,7 @@ import * as songService from "./songService.js";
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const showForm = async (c) => {
+		const id = c.req.param("id");
   return c.html(
     eta.render("index.eta", { songs: await songService.listSongs() }),
   );
