@@ -10,4 +10,4 @@ const listSongs = async () => {
   return songs;
 };
 
-export	{ listSongs };
+export { listSongs };
