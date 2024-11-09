@@ -15,4 +15,4 @@ const createSong = async (c) => {
 		return c.redirect("/");
 }
 
-export	{ showForm };
+export	{ showForm, createSong };
