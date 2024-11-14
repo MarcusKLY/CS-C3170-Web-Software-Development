@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<body>
+<html>
+  <head>
+    <title>Feedback page</title>
+  </head>
+  <body>
     <h1>How would you rate this experience?</h1>
     <div id="feedback-buttons">
         <!-- Each button in its own form to create a POST request -->
@@ -16,12 +20,11 @@
         </form>
         
         <form action="/feedbacks/4" method="POST">
-            <button type="submit">Very Good</button>
+            <button type="submit">Very good</button>
         </form>
         
         <form action="/feedbacks/5" method="POST">
             <button type="submit">Excellent</button>
         </form>
-    </div>
-</body>
+    </div>  </body>
 </html>
