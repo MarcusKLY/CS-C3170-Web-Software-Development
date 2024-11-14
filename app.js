@@ -22,7 +22,7 @@ import * as feedbacks from "./feedbacks.js";
 
 const app = new Hono();
 
-app.get("/", (c) => { return c.html("/templates/index.html"); });
+app.get("/", (c) => { return c.html("/templates/index.eta"); });
 	
 
 app.get("/feedbacks/:id", async (c) => {
