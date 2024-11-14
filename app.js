@@ -1,19 +1,16 @@
 import { Hono } from "https://deno.land/x/hono@v3.12.11/mod.ts";
+import { Eta } from "https://deno.land/x/eta@v3.4.0/mod.ts";
 import * as feedbacks from "./feedbacks.js";
-import { renderFile } from "https://deno.land/x/eta/mod.ts";
-import { configure, renderFile } from "https://deno.land/x/eta/mod.ts";
 
 // Set the views folder
-configure({ views: "./templates" });
+const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const app = new Hono();
 
 app.get("/", async (c) => {
-  const html = await renderFile("index.eta", {});  // Now you can simply use the filename
-  if (!html) {
-    return c.text("Template not found", 500);
-  }
-  return c.html(html);
+  return c.html(
+    await eta.renderFile("index.eta")
+  );
 });
 
 app.get("/feedbacks/:id", async (c) => {
