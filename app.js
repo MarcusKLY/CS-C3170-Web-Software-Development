@@ -22,8 +22,10 @@ import * as feedbacks from "./feedbacks.js";
 
 const app = new Hono();
 
-app.get("/", (c) => { return c.html("/templates/index.eta"); });
-	
+app.get("/", async (c) => {
+  const html = await renderFile("/templates/index.eta", {});  // Render the template
+  return c.html(html);
+});
 
 app.get("/feedbacks/:id", async (c) => {
   const id = c.req.param("id");
