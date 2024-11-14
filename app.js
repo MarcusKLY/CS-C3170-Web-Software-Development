@@ -5,7 +5,7 @@ import * as feedbacks from "./feedbacks.js";
 
 const app = new Hono();
 
-app.get("/", async (c) => {feedbacks.showForm(c)});
+app.post("/", async (c) => {feedbacks.showForm(c)});
 
 // app.get("/feedbacks/:id", async (c) => {
 //   const id = c.req.param("id");
