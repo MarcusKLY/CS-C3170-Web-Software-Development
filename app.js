@@ -7,7 +7,10 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const app = new Hono();
 
-app.get("/", async (c) => {feedbacks.showForm(c)});
+app.get("/", async (c) => {
+  const html = await eta.renderFile("index.eta");
+  return c.html(html);
+});
 
 app.get("/feedbacks/:id", async (c) => {
   const id = c.req.param("id");

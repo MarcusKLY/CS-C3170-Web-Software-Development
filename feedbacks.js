@@ -19,6 +19,4 @@ const incrementFeedbackCount = async (id) => {
   await kv.set(["feedbacks", id], count + 1);
 };
 
-
-
 export { getFeedbackCount, incrementFeedbackCount, showForm };
