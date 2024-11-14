@@ -20,7 +20,7 @@ app.get("/feedbacks/:id", async (c) => {
 app.post("/feedbacks/:id", async (c) => {
   const id = c.req.param("id");
   await feedbacks.incrementFeedbackCount(id);
-  return c.text(`OK`);
+  return c.redirect(`/`);
 });
 
 Deno.serve(app.fetch);
