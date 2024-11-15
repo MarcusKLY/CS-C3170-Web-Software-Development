@@ -25,9 +25,10 @@
     <!-- Update course form -->
     <form method="POST" action="/courses/<%= it.course?.courseId %>">
       <label for="name">Course name:</label>
-      <input type="text" id="name" name="name" value="<%= it.course?.name !== undefined ? it.course.name : '' %>" /><br />
+      <input type="text" id="name" name="name" value="<%= it.course?.name ? it.course.name : '' %>" /><br />
       <input type="submit" value="Update course" />
     </form>
+
 
     <!-- Feedback buttons for rating the course -->
     <p>How would you rate this course?</p>

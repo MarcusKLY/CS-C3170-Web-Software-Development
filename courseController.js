@@ -9,15 +9,15 @@ const courseSchema = z.object({
 });
 
 const showForm = async (c) => {
-  return c.html(
-    eta.render("courses.eta", { courses: await courseService.listCourses(), errors: null, course: {} }),
-  );
+  const courses = await courseService.listCourses();
+  return c.html(eta.render("courses.eta", { courses, errors: null, course: {} }));
 };
+
 
 const createCourse = async (c) => {
   const body = await c.req.parseBody();
   const course = {
-    name: body.name,
+    name: body.name || "",  // Ensure the name is set or defaults to an empty string
   };
 
   const validationResult = courseSchema.safeParse(course);
@@ -32,15 +32,17 @@ const createCourse = async (c) => {
       errors[field]._errors.push(e.message);
     });
 
-    // Render the form again with validation errors and the current input values
+    // Render the form again with validation errors and user's input value retained
     return c.html(
-      eta.render("courses.eta", { courses: await courseService.listCourses(), errors, course }),
+      eta.render("index.eta", { errors, course }) // Make sure we are passing the course object containing user's input
     );
   }
 
+  // If validation succeeds
   await courseService.createCourse(course);
   return c.redirect("/courses");
 };
+
 
 const showCourse = async (c) => {
   const courseId = c.req.param("courseId");
