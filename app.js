@@ -12,10 +12,8 @@ app.get("/", async (c) => {
     let name = getCookie(c, "name");
 
     // Render the template
-    const html = await Eta.render("index.eta", { name });
+    return c.html(eta.render("index.eta", { name }));
 
-    // Return the response
-    return c.html(html);
   } catch (error) {
     console.error("Error in GET /:", error);
     return c.text(`Internal Server Errorrrr ${error}`, 500);
