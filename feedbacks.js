@@ -17,7 +17,11 @@ const incrementFeedbackCount = async (courseId, feedbackId) => {
   try {
     const currentCount = await getFeedbackCount(courseId, feedbackId);
     const key = ["feedback", courseId, feedbackId];
-    await kv.set(key, currentCount + 1);
+    const newCount = currentCount + 1;
+
+    await kv.set(key, newCount);
+
+    console.log(`Feedback count updated for courseId: ${courseId}, feedbackId: ${feedbackId} to ${newCount}`);
   } catch (error) {
     console.error(`Error incrementing feedback count for courseId: ${courseId}, feedbackId: ${feedbackId}`, error);
     throw new Error("Could not increment feedback count.");

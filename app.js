@@ -6,13 +6,19 @@ import * as courseController from "./courseController.js";
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 const app = new Hono();
 
-app.get("/courses/:courseId/feedbacks/:id", async (c) => {
+app.get("/courses/:courseId/feedbacks/:feedbackId", async (c) => {
   try {
-    const id = c.req.param("id");
-    const courseId = c.req.param("courseId");
-    const feedbackCount = await feedbacks.getFeedbackCount(courseId, id);
-    return c.text(`Feedback ${id}: ${feedbackCount}`);
+    const courseId = c.params?.courseId;
+    const feedbackId = c.params?.feedbackId;
+
+    if (!courseId || !feedbackId) {
+      throw new Error("Missing courseId or feedbackId");
+    }
+
+    const feedbackCount = await getFeedbackCount(courseId, feedbackId);
+    return c.text(`Feedback ${feedbackId}: ${feedbackCount}`);
   } catch (error) {
+    console.error("Error in GET feedback handler:", error);
     return c.text(`Internal Server Error: ${error.message}`, 500);
   }
 });
