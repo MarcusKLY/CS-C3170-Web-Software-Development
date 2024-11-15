@@ -40,8 +40,9 @@ app.post("/courses/:courseId/feedbacks/:feedbackId", async (c) => {
   	});
 			const courseId = c.req.param("courseId");
 			const feedbackId = c.req.param("feedbackId");
-			const count = getAndIncrementCount(sessionId, courseId);
 			await feedbacks.incrementFeedbackCount(courseId, feedbackId);
+			return c.text(`Feedback ${feedbackId} incremented`);
+			const count = getAndIncrementCount(sessionId, courseId);
 			return c.redirect(`/courses/${courseId}`, {count});
   } catch (error) {
     console.error("Error in GET /:", error);
