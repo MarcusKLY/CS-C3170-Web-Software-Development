@@ -10,6 +10,7 @@ app.get("/", async (c) => {
   try {
     // Retrieve the cookie value using getCookie
     let name = getCookie(c, "name");
+				return c.text(`Cookie got ${name}`);
 
     // Render the template
     const html = await eta.render("index.eta", name	? { name } : {});
@@ -29,8 +30,7 @@ app.post("/", async (c) => {
 			const name = formData.name;
 			// Set the cookie value using setCookie
 			setCookie(c, "name", name);
-			let ee = getCookie(c, "name");
-			return c.text(`Cookie set ${ee}`);
+
 			// Redirect to the home page
 			return c.redirect("/");
   } catch (error) {
