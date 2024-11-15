@@ -16,22 +16,22 @@ const createCourse = async (c) => {
 };
 
 const showCourse = async (c) => {
-  const id = c.req.param("id");
+  const courseId = c.req.param("courseId");
 		return c.html(
-			eta.render("course.eta", { course: await courseService.getCourse(id) }),
+			eta.render("course.eta", { course: await courseService.getCourse(courseId) }),
 		);
 };
 
 const updateCourse = async (c) => {
-  const id = c.req.param("id");
+  const courseId = c.req.param("courseId");
   const body	= await c.req.parseBody();
-		await	courseService.updateCourse(id, body);
-		return c.redirect(`/courses/${id}`);
+		await	courseService.updateCourse(courseId, body);
+		return c.redirect(`/courses/${courseId}`);
 };
 
 const deleteCourse = async (c) => {
-		const id = c.req.param("id");
-		await courseService.deleteCourse(id);
+		const courseId = c.req.param("courseId");
+		await courseService.deleteCourse(courseId);
 		return c.redirect("/courses");
 };
 

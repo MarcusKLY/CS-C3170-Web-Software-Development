@@ -1,8 +1,8 @@
 const createCourse = async (course) => {
-  course.id = crypto.randomUUID();
+  course.courseId = crypto.randomUUID();
 
   const kv = await Deno.openKv();
-  await kv.set(["courses", course.id], course);
+  await kv.set(["courses", course.courseId], course);
 };
 
 const listCourses = async () => {
@@ -17,21 +17,21 @@ const listCourses = async () => {
   return courses;
 };
 
-const getCourse = async (id) => {
+const getCourse = async (courseId) => {
   const kv = await Deno.openKv();
-  const course = await kv.get(["courses", id]);
+  const course = await kv.get(["courses", courseId]);
   return course?.value ?? {};
 };
 
-const updateCourse = async (id, course) => {
-  course.id = id;
+const updateCourse = async (courseId, course) => {
+  course.courseId = courseId;
   const kv = await Deno.openKv();
-  await kv.set(["courses", id], course);
+  await kv.set(["courses", courseId], course);
 }
 
-const deleteCourse = async (id) => {
+const deleteCourse = async (courseId) => {
 		const kv = await Deno.openKv();
-		await kv.delete(["courses", id]);
+		await kv.delete(["courses", courseId]);
 };
 
 export { createCourse, listCourses, getCourse, updateCourse, deleteCourse };
