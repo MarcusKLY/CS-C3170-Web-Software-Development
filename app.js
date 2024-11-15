@@ -9,10 +9,10 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 app.get("/", async (c) => {
   try {
     // Retrieve the cookie value using getCookie
-    const name = getCookie(c.req.header("cookie"), "name");
+    let name = getCookie(c, "name");
 
-    // Render the template based on whether the name is in the cookie
-    return c.html(await eta.render("index.eta", { rname: name }));
+    // Render the template
+    return c.html(await eta.render("index.eta", { name }));
 
   } catch (error) {
     console.error("Error in GET /:", error);
@@ -22,19 +22,15 @@ app.get("/", async (c) => {
 
 app.post("/", async (c) => {
   try {
-    // Parse form data from the request body
-    const body = await c.req.parseBody();
-    const name = body?.name;
-
-    if (!name) {
-      return c.text("Name is required", 400);
-    }
+    // Retrieve the name from the request body
+    const formData = await c.req.parseBody();
+    const name = formData.name;
 
     // Set the cookie value using setCookie
-    setCookie(c, "name", name, { path: "/", maxAge: 60 * 60 * 24 }); // Expires in one day
+    setCookie(c, "name", name);
 
-    // Redirect to the home page (GET /)
-    return c.redirect("/", 302);
+    // Redirect to the home page
+    return c.redirect("/");
   } catch (error) {
     console.error("Error in POST /:", error);
     return c.text(`Internal Server Error: ${error}`, 500);
