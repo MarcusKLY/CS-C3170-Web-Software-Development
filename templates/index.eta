@@ -4,11 +4,15 @@
     <title>Greeting</title>
   </head>
   <body>
-    <!-- adjust to account for the possible name -->
-    <form method="POST" action="/">
-      <label for="name">Type in your name:</label>
-      <input type="text" id="name" name="name" /><br/>
-      <input type="submit" />
-    </form>
+    <% if (name) { %>
+      <p>Hi <%= name %>!</p>
+    <% } else { %>
+      <!-- adjust to account for the possible name -->
+      <form method="POST" action="/">
+        <label for="name">Type in your name:</label>
+        <input type="text" id="name" name="name" /><br/>
+        <input type="submit" />
+      </form>
+    <% } %>
   </body>
 </html>
