@@ -8,8 +8,8 @@ const app = new Hono();
 
 app.get("/courses/:courseId/feedbacks/:feedbackId", async (c) => {
   try {
-    const courseId = c.params?.courseId;
-    const feedbackId = c.params?.feedbackId;
+    const id = c.req.param("id");
+    const courseId = c.req.param("courseId");
 
     if (!courseId && !feedbackId) {
       throw new Error("Missing courseId and feedbackId");
