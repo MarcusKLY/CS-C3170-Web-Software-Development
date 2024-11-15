@@ -5,6 +5,7 @@ import {
   setSignedCookie,
 } from "https://deno.land/x/hono@v3.12.11/helper.ts";
 import * as courseService from "./courseService.js";
+import { getCount } from "./app.js";
 
 const sessionCounts = new Map();
 const secret = "secret";
@@ -41,8 +42,7 @@ const showCourse = async (c) => {
   try {
     const id = c.req.param("id");
     const sessionId = await getSignedCookie(c, secret, "sessionId") ?? crypto.randomUUID();
-    const count = getSignedCookie(sessionId, id);
-
+    count = getCount(sessionId, id);
     const course = await courseService.getCourse(id);
     return await c.text(`Course ${id}: ${count}`);
 

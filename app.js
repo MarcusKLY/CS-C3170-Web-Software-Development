@@ -24,6 +24,15 @@ const getAndIncrementCount = (sessionId, courseId) => {
   return count;
 };
 
+const getCount = (sessionId, courseId) => {
+		if (!sessionCounts.has(sessionId)) {
+				return 0;
+		}
+
+		const courseCounts = sessionCounts.get(sessionId);
+		return courseCounts.get(courseId) ?? 0;
+}
+
 app.get("/courses/:courseId/feedbacks/:feedbackId", async (c) => {
   const courseId = c.req.param("courseId");
   const feedbackId = c.req.param("feedbackId");
@@ -56,5 +65,5 @@ app.get("/courses/:id", courseController.showCourse);
 app.post("/courses", courseController.createCourse);
 app.post("/courses/:id/delete", courseController.deleteCourse);
 
-export { getAndIncrementCount };
+export { getAndIncrementCount, getCount };
 export default app;
