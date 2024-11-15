@@ -10,7 +10,8 @@ const app = new Hono();
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 app.get("/", async (req, res) => {
-    res.render("index.eta");
+		const name = getCookie(req, "name") || "World";
+		res.body = await eta.renderFile("index.eta", { name });
 });
 
-export default app;	
+export default app;
