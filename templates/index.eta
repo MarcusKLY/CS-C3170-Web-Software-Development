@@ -4,27 +4,21 @@
     <title>Feedback page</title>
   </head>
   <body>
-    <h1>How would you rate this experience?</h1>
-    <div id="feedback-buttons">
-        <!-- Each button in its own form to create a POST request -->
-        <form action="/feedbacks/1" method="POST">
-            <button type="submit">Poor</button>
-        </form>
-        
-        <form action="/feedbacks/2" method="POST">
-            <button type="submit">Fair</button>
-        </form>
-        
-        <form action="/feedbacks/3" method="POST">
-            <button type="submit">Good</button>
-        </form>
-        
-        <form action="/feedbacks/4" method="POST">
-            <button type="submit">Very good</button>
-        </form>
-        
-        <form action="/feedbacks/5" method="POST">
-            <button type="submit">Excellent</button>
-        </form>
-    </div>  </body>
+    <p>How would you rate this experience?</p>
+    <form method="POST" action="/feedbacks/1">
+      <input type="submit" value="Poor"></input>
+    </form>
+    <form method="POST" action="/feedbacks/2">
+      <input type="submit" value="Fair"></input>
+    </form>
+    <form method="POST" action="/feedbacks/3">
+      <input type="submit" value="Good"></input>
+    </form>
+    <form method="POST" action="/feedbacks/4">
+      <input type="submit" value="Very good"></input>
+    </form>
+    <form method="POST" action="/feedbacks/5">
+      <input type="submit" value="Excellent"></input>
+    </form>
+  </body>
 </html>

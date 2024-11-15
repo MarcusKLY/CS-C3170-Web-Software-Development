@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>book</title>
+  </head>
+  <body>
+    <p>Add a book:</p>
+    <form method="POST" action="/books">
+      <label for="name">Course name:</label>
+      <input type="text" id="name" name="name" /><br/>
+      <input type="submit" value="Add" />
+    </form>
+    <p>Existing courses:</p>
+    <ul>
+    <% it.courses.forEach((course) => { %>
+      <li>
+        <a href="/courses/<%= course.id %>"><%= course.name %></a>
+        <form method="POST" action="/courses/<%= course.id %>/delete">
+          <input type="submit" value="Delete" />
+        </form>
+      </li>
+    <% }); %>
+    </ul>
+  </body>
+</html>

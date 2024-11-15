@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Course</title>
+  </head>
+  <body>
+    <form method="POST" action="/courses/<%= it.course.id %>">
+      <label for="name">Course name:</label>
+      <input type="text" id="name" name="name" value="<%= it.course.name %>" /><br/>
+      <input type="submit" value="Update course" />
+    </form>
+    
+    <p><a href="/courses">Back to courses</a></p>
+  </body>
+</html>
