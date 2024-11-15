@@ -14,8 +14,8 @@
     <ul>
     <% it.courses.forEach((course) => { %>
       <li>
-        <a href="/courses/<%= course.id %>"><%= course.name %></a>
-        <form method="POST" action="/courses/<%= course.id %>/delete">
+        <a href="/courses/<%= course.courseId %>"><%= course.name %></a>
+        <form method="POST" action="/courses/<%= course.courseId %>/delete">
           <input type="submit" value="Delete" />
         </form>
       </li>

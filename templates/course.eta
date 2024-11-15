@@ -5,9 +5,9 @@
   </head>
   <body>
 		 	<h1>Course: <%= it.course.name %></h1>
-    <form method="POST" action="/courses/<%= it.course.id %>">
+    <form method="POST" action="/courses/<%= it.course.courseId %>">
       <label for="name">Course name:</label>
-      <input type="text" id="name" name="name" value="<%= it.course.name %>" /><br/>
+      <input type="text" courseId="name" name="name" value="<%= it.course.name %>" /><br/>
       <input type="submit" value="Update course" />
     </form>
     

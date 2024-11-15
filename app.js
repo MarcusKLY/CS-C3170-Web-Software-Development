@@ -6,17 +6,17 @@ import * as courseController from "./courseController.js";
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 const app = new Hono();
 
-app.get("/", async (c) => {
+app.get("/courses/:courseId", async (c) => {
   return c.html(eta.render("index.eta"));
 });
 
-app.get("/feedbacks/:id", async (c) => {
+app.get("/courses/:courseId/feedbacks/:id", async (c) => {
   const id = c.req.param("id");
   const feedbackCount = await feedbacks.getFeedbackCount(id);
   return c.text(`Feedback ${id}: ${feedbackCount}`);
 });
 
-app.post("/feedbacks/:id", async (c) => {
+app.post("/courses/:courseId/feedbacks/:id", async (c) => {
   const id = c.req.param("id");
   await feedbacks.incrementFeedbackCount(id);
   return c.redirect("/");
