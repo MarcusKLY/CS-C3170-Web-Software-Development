@@ -4,6 +4,7 @@
     <title>Course</title>
   </head>
   <body>
+		 	<h1>Course: <%= it.course.name %></h1>
     <form method="POST" action="/courses/<%= it.course.id %>">
       <label for="name">Course name:</label>
       <input type="text" id="name" name="name" value="<%= it.course.name %>" /><br/>

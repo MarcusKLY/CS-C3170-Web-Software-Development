@@ -12,7 +12,7 @@ const showForm = async (c) => {
 const createCourse = async (c) => {
   const body = await c.req.parseBody();
   await courseService.createCourse(body);
-  return c.redirect("/books");
+  return c.redirect("/courses");
 };
 
 const showCourse = async (c) => {
