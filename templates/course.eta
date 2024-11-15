@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Course</title>
+  </head>
+  <body>
+    <!-- Display course name -->
+    <h1>Course: <%= it.course.name %></h1>
+    
+    <!-- Feedback prompt -->
+    <p>How would you rate this experience???????</p>
+
+    <!-- Feedback buttons -->
+    <% if (it.course.courseId) { %>
+      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/1">
+        <button type="submit", value="Poor">Poor</button>
+      </form>
+      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/2">
+        <button type="submit", value="Fair">Fair</button>
+      </form>
+      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/3">
+        <button type="submit", value="Good">Good</button>
+      </form>
+      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/4">
+        <button type="submit", value="Very good">Very good</button>
+      </form>
+      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/5">
+        <button type="submit", value="Excellent">Excellent</button>
+      </form>
+    <% } else { %>
+      <p>Error: Course ID is missing.</p>
+    <% } %>
+
+    <!-- Back link -->
+    <p><a href="/courses">Back to courses</a></p>
+  </body>
+</html>
