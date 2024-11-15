@@ -18,7 +18,7 @@ app.get("/", async (c) => {
     return c.html(html);
   } catch (error) {
     console.error("Error in GET /:", error);
-    return c.text(`Internal Server Error ${error}`, 500);
+    return c.text(`Internal Server Errorrrr ${error}`, 500);
   }
 });
 
