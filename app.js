@@ -13,10 +13,10 @@ app.get("/courses/:courseId/feedbacks/:id", async (c) => {
 });
 
 app.post("/courses/:courseId/feedbacks/:id", async (c) => {
-  const id = c.req.param("id");
-  const courseId = c.req.param("courseId");
+  const id = c.req.params.id;
+  const courseId = c.req.params.courseId;
   await feedbacks.incrementFeedbackCount(id);
-  return c.redirect("/courses/${courseId}");
+  return c.redirect(`/courses/${courseId}`);
 });
 
 app.get("/courses", courseController.showForm);
