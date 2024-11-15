@@ -1,7 +1,16 @@
 import { Eta } from "https://deno.land/x/eta@v3.4.0/src/index.ts";
 import * as bookService from "./bookService.js";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
+
 
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
+
+const bookSchema = z.object({
+  name: z.string().min(3, "The book name should be a string of at least 3 characters."),
+  pages: z.number().min(1, "The number of pages should be a number between 1 and 1000.")
+             .max(1000, "The number of pages should be a number between 1 and 1000."),
+  isbn: z.string().length(13, "The ISBN should be a string of 13 characters.")
+});
 
 const showForm = async (c) => {
   return c.html(
@@ -11,7 +20,20 @@ const showForm = async (c) => {
 
 const createBook = async (c) => {
   const body = await c.req.parseBody();
-  await bookService.createBook(body);
+  const book = { name: body.name, pages: Number(body.pages), isbn: body.isbn };
+
+  const validationResult = bookSchema.safeParse(book);
+
+  if (!validationResult.success) {
+    const errors = validationResult.error.errors.map((e) => e.message);
+    // Render the form again with validation errors and the current input values
+    return c.html(
+      eta.render("books.eta", { books: await bookService.listBooks(), errors, book }),
+    );
+  }
+
+  // If validation passes, proceed with creating the book
+  await bookService.createBook(book);
   return c.redirect("/books");
 };
 
