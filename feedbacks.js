@@ -1,22 +1,25 @@
 const kv = await Deno.openKv(); // Open kv once and reuse it
 
-const getFeedbackCount = async (courseId, id) => {
+// Get feedback count for a specific course and feedback value
+const getFeedbackCount = async (courseId, feedbackId) => {
   try {
-    const store = await kv.get(["feedbacks", courseId, id]);
+    const key = ["feedback", courseId, feedbackId];
+    const store = await kv.get(key);
     return store?.value ?? 0;
   } catch (error) {
-    console.error("Error fetching feedback count:", error);
+    console.error(`Error fetching feedback count for courseId: ${courseId}, feedbackId: ${feedbackId}`, error);
     throw new Error("Could not retrieve feedback count.");
   }
 };
 
-const incrementFeedbackCount = async (courseId, id) => {
+// Increment the feedback count for a specific course and feedback value
+const incrementFeedbackCount = async (courseId, feedbackId) => {
   try {
-    const count = await getFeedbackCount(courseId, id);
-    await kv.set(["feedbacks", courseId, id], count + 1);
+    const currentCount = await getFeedbackCount(courseId, feedbackId);
+    const key = ["feedback", courseId, feedbackId];
+    await kv.set(key, currentCount + 1);
   } catch (error) {
-    console.error(`Error incrementing feedback count for courseId: ${courseId}, id: ${id}`, error);
+    console.error(`Error incrementing feedback count for courseId: ${courseId}, feedbackId: ${feedbackId}`, error);
     throw new Error("Could not increment feedback count.");
   }
 };
-
