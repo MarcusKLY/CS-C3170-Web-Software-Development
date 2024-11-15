@@ -4,34 +4,22 @@
     <title>Course</title>
   </head>
   <body>
-    <!-- Display course name -->
-    <h1>Course: <%= it.course.name %></h1>
-    
-    <!-- Feedback prompt -->
-    <p>How would you rate this experience???????</p>
-
-    <!-- Feedback buttons -->
-    <% if (it.course.courseId) { %>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/1">
-        <button type="submit", value="Poor">Poor</button>
-      </form>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/2">
-        <button type="submit", value="Fair">Fair</button>
-      </form>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/3">
-        <button type="submit", value="Good">Good</button>
-      </form>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/4">
-        <button type="submit", value="Very good">Very good</button>
-      </form>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/5">
-        <button type="submit", value="Excellent">Excellent</button>
-      </form>
-    <% } else { %>
-      <p>Error: Course ID is missing.</p>
-    <% } %>
-
-    <!-- Back link -->
-    <p><a href="/courses">Back to courses</a></p>
+    <p><%= it.course.name %></p>
+    <p>How would you rate this experience?</p>
+    <form method="POST" action="/courses/<%= it.course.id %>/feedbacks/1">
+      <input type="submit" value="Poor"></input>
+    </form>
+    <form method="POST" action="/courses/<%= it.course.id %>/feedbacks/2">
+      <input type="submit" value="Fair"></input>
+    </form>
+    <form method="POST" action="/courses/<%= it.course.id %>/feedbacks/3">
+      <input type="submit" value="Good"></input>
+    </form>
+    <form method="POST" action="/courses/<%= it.course.id %>/feedbacks/4">
+      <input type="submit" value="Very good"></input>
+    </form>
+    <form method="POST" action="/courses/<%= it.course.id %>/feedbacks/5">
+      <input type="submit" value="Excellent"></input>
+    </form>
   </body>
 </html>
