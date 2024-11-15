@@ -1,7 +1,7 @@
-const getFeedbackCount = async (courseID, id) => {
+const getFeedbackCount = async (courseId, id) => {
   try {
     const kv = await Deno.openKv();
-    const store = await kv.get(["feedbacks", courseID, id]);
+    const store = await kv.get(["feedbacks", courseId, id]);
     return store?.value ?? 0;
   } catch (error) {
     console.error("Error fetching feedback count:", error);
@@ -9,11 +9,11 @@ const getFeedbackCount = async (courseID, id) => {
   }
 };
 
-const incrementFeedbackCount = async (courseID, id) => {
+const incrementFeedbackCount = async (courseId, id) => {
   try {
     const kv = await Deno.openKv();
-    const count = await getFeedbackCount(courseID, id);
-    await kv.set(["feedbacks", courseID, id], count + 1);
+    const count = await getFeedbackCount(courseId, id);
+    await kv.set(["feedbacks", courseId, id], count + 1);
   } catch (error) {
     console.error("Error incrementing feedback count:", error);
     throw new Error("Could not increment feedback count.");
