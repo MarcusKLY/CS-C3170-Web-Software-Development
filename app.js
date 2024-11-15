@@ -22,7 +22,7 @@ app.get('/', async (c) => {
     }
   } catch (error) {
     console.error("Error in GET request:", error);
-    return c.text(`Internal Server Error1 {error}`, 500);	
+    return c.text(`Internal Server Error1 ${error}`, 500);	
   }
 });
 
@@ -51,7 +51,7 @@ app.post('/', async (c) => {
     }
   } catch (error) {
     console.error("Error in POST request:", error);
-    return c.text(`Internal Server Error2 {error}`, 500);	
+    return c.text(`Internal Server Error2 ${error}`, 500);	
   }
 });
 
