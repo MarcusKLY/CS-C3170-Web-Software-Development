@@ -16,7 +16,7 @@ app.post("/courses/:courseId/feedbacks/:id", async (c) => {
   const id = c.req.param("id");
   const courseId = c.req.param("courseId");
   await feedbacks.incrementFeedbackCount(id);
-  return c.redirect("/courses/<%= courseId %>");
+  return c.redirect("/courses/${courseId}");
 });
 
 app.get("/courses", courseController.showForm);
