@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Greeting</title>
-</head>
+	<head>
+		<title>Greeting</title>
+	</head>
 
-<body>
-	<% if (name) { %>
-		<p>Hi <%= name %>!</p>
-		<% } else { %>
-			<form method="POST" action="/">
-				<label for="name">Type in your name:</label>
-				<input type="text" id="name" name="name" required /><br />
-				<input type="submit" />
-			</form>
-			<% } %>
-</body>
-
+	<body>
+		<% if (name) { %>
+			<p>Hi <%= name %>!</p>
+			<% } else { %>
+				<form method="POST" action="/">
+					<label for="name">Type in your name:</label>
+					<input type="text" id="name" name="name" /><br />
+					<input type="submit" />
+				</form>
+				<% } %>
+	</body>
 </html>
