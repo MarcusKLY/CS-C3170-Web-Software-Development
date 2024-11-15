@@ -11,6 +11,10 @@ app.get("/courses/:courseId/feedbacks/:feedbackId", async (c) => {
     const courseId = c.params?.courseId;
     const feedbackId = c.params?.feedbackId;
 
+    if (!courseId && !feedbackId) {
+      throw new Error("Missing courseId and feedbackId");
+    }
+
     if (!courseId || !feedbackId) {
       throw new Error("Missing courseId or feedbackId");
     }
@@ -20,7 +24,7 @@ app.get("/courses/:courseId/feedbacks/:feedbackId", async (c) => {
     return c.text(`Feedback ${feedbackId}: ${feedbackCount}`);
   } catch (error) {
     console.error("Error in GET feedback handler:", error);
-    return c.text(`Internal Server Error: ${error.message}`, 500);
+    return c.text(`GET Internal Server Error: ${error.message}`, 500);
   }
 });
 
@@ -32,7 +36,7 @@ app.post("/courses/:courseId/feedbacks/:id", async (c) => {
     return c.redirect(`/courses/${courseId}`);
   } catch (error) {
     console.error("Error in POST feedback handler:", error);
-    return c.text(`Internal Server Error: ${error.message}`, 500);
+    return c.text(`POST Internal Server Error: ${error.message}`, 500);
   }
 });
 
