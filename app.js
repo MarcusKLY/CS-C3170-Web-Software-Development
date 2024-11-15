@@ -10,7 +10,7 @@ const app = new Hono();
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 app.get("/", async (req, res) => {
-    res.render("index");
+    res.render("index.eta");
 });
 
-export default app;
+export default app;	
