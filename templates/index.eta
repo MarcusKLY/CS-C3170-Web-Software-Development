@@ -4,7 +4,7 @@
     <title>Greeting</title>
   </head>
   <body>
-    <% if (name) { %>
+    <% if (typeof name !== 'undefined' && name)  { %>
       <p>Hi <%= name %>!</p>
     <% } else { %>
       <!-- adjust to account for the possible name -->
