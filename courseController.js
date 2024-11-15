@@ -41,7 +41,7 @@ const showCourse = async (c) => {
   try {
     const id = c.req.param("id");
     const sessionId = await getSignedCookie(c, secret, "sessionId") ?? crypto.randomUUID();
-    const count = getAndIncrementCount(sessionId, id);
+    const count = getSignedCookie(sessionId, id);
 
     const course = await courseService.getCourse(id);
     return await c.text(`Course ${id}: ${count}`);
