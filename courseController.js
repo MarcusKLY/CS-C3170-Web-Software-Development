@@ -2,7 +2,6 @@ import { Eta } from "https://deno.land/x/eta@v3.4.0/src/index.ts";
 import * as courseService from "./courseService.js";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
-
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const courseSchema = z.object({
@@ -33,33 +32,34 @@ const createCourse = async (c) => {
       errors[field]._errors.push(e.message);
     });
 
+    // Render the form again with validation errors and the current input values
     return c.html(
       eta.render("courses.eta", { courses: await courseService.listCourses(), errors, course }),
     );
   }
 
-  await courseService.createCourse(body);
+  await courseService.createCourse(course);
   return c.redirect("/courses");
 };
 
 const showCourse = async (c) => {
   const courseId = c.req.param("courseId");
-		return c.html(
-			eta.render("index.eta", { course: await courseService.getCourse(courseId) }),
-		);
+  return c.html(
+    eta.render("index.eta", { course: await courseService.getCourse(courseId) }),
+  );
 };
 
 const updateCourse = async (c) => {
   const courseId = c.req.param("courseId");
-  const body	= await c.req.parseBody();
-		await	courseService.updateCourse(courseId, body);
-		return c.redirect(`/courses/${courseId}`);
+  const body = await c.req.parseBody();
+  await courseService.updateCourse(courseId, body);
+  return c.redirect(`/courses/${courseId}`);
 };
 
 const deleteCourse = async (c) => {
-		const courseId = c.req.param("courseId");
-		await courseService.deleteCourse(courseId);
-		return c.redirect("/courses");
+  const courseId = c.req.param("courseId");
+  await courseService.deleteCourse(courseId);
+  return c.redirect("/courses");
 };
 
 export { createCourse, showForm, showCourse, updateCourse, deleteCourse };
