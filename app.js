@@ -19,7 +19,7 @@ app.get("/courses/:courseId/feedbacks/:id", async (c) => {
 
 app.post("/courses/:courseId/feedbacks/:id", async (c) => {
   try {
-    const id = c.req.params.id;
+    const id = c.req.param(id);
     const courseId = c.req.params.courseId;
     await feedbacks.incrementFeedbackCount(courseId, id);
     return c.redirect(`/courses/${courseId}`);
