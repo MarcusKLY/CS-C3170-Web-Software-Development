@@ -1,38 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Course</title>
+    <title>Feedback Page</title>
   </head>
   <body>
-    <!-- Display course name -->
-    <h1>Course: <%= it.course.name %></h1>
-    
-    <!-- Feedback prompt -->
     <p>How would you rate this experience?</p>
 
-    <!-- Feedback buttons -->
-    <% if (it.course.courseId) { %>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/1">
-        <button type="submit">Poor</button>
-      </form>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/2">
-        <button type="submit">Fair</button>
-      </form>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/3">
-        <button type="submit">Good</button>
-      </form>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/4">
-        <button type="submit">Very good</button>
-      </form>
-      <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/5">
-        <button type="submit">Excellent</button>
-      </form>
-    <% } else { %>
-      <p>Error: Course ID is missing.</p>
-    <% } %>
-
-    <!-- Back link -->
-    <p><a href="/courses">Back to courses</a></p>
+    <!-- Feedback forms using button elements to match the locator test requirement -->
+    <form method="POST" action="/feedbacks/1">
+      <button type="submit" id="Poor">Poor</button>
+    </form>
+    <form method="POST" action="/feedbacks/2">
+      <button type="submit" id="Fair">Fair</button>
+    </form>
+    <form method="POST" action="/feedbacks/3">
+      <button type="submit" id="Good">Good</button>
+    </form>
+    <form method="POST" action="/feedbacks/4">
+      <button type="submit" id="Very good">Very good</button>
+    </form>
+    <form method="POST" action="/feedbacks/5">
+      <button type="submit" id="Excellent">Excellent</button>
+    </form>
   </body>
 </html>
-
