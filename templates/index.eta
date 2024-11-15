@@ -14,7 +14,6 @@
         <input type="text" id="name" name="name" required /><br />
         <input type="submit" />
       </form>
-      <p>The content of the name variable is: "<%= name || 'undefined or empty' %>"</p>
     <% } %>
   </body>
 </html>
