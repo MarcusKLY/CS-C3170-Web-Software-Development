@@ -18,7 +18,7 @@ const createCourse = async (c) => {
 const showCourse = async (c) => {
   const courseId = c.req.param("courseId");
 		return c.html(
-			eta.render("course.eta", { course: await courseService.getCourse(courseId) }),
+			eta.render("index.eta", { course: await courseService.getCourse(courseId) }),
 		);
 };
 

@@ -8,7 +8,7 @@
     <h1>Course: <%= it.course.name %></h1>
     
     <!-- Feedback prompt -->
-    <p>How would you rate this experience?</p>
+    <p>How would you rate this experience???????</p>
 
     <!-- Feedback buttons -->
     <% if (it.course.courseId) { %>
