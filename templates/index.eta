@@ -4,7 +4,7 @@
     <title>Greeting</title>
   </head>
   <body>
-    <% if (name) { %>
+    <% if (name != "xxxxxxx") { %>
       <p>Hi <%= name %>!</p>
       <p>The content of the name variable is: "<%= name %>"</p>
     <% } else { %>
