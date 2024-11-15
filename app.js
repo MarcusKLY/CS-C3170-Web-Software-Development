@@ -23,9 +23,9 @@ app.post("/feedbacks/:id", async (c) => {
 });
 
 app.get("/courses", courseController.showForm);
-app.get("/courses/:id", courseController.showTodo);
-app.post("/courses", courseController.createTodo);
-app.post("/courses/:id", courseController.updateTodo);
-app.post("/courses/:id/delete", courseController.deleteTodo);
+app.get("/courses/:id", courseController.showCourse);
+app.post("/courses", courseController.createCourse);
+app.post("/courses/:id", courseController.updateCourse);
+app.post("/courses/:id/delete", courseController.deleteCourse);
 
 export default app;
