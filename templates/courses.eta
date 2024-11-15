@@ -5,7 +5,7 @@
   </head>
   <body>
     <p>Add a course:</p>
-    <form method="POST" action="/course">
+    <form method="POST" action="/courses">
       <label for="name">Course name:</label>
       <input type="text" id="name" name="name" /><br/>
       <input type="submit" value="Add" />
