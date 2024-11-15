@@ -14,7 +14,7 @@ app.get("/courses/:courseId/feedbacks/:id", async (c) => {
     return c.text(`Feedback ${id}: ${feedbackCount}`);
   } catch (error) {
     console.error("Error in GET feedback handler:", error);
-    return c.text("Internal Server Error", 500);
+    return c.text("Internal Server Errorrrrrrrr", 500);
   }
 });
 
@@ -26,7 +26,7 @@ app.post("/courses/:courseId/feedbacks/:id", async (c) => {
     return c.redirect(`/courses/${courseId}`);
   } catch (error) {
     console.error("Error in POST feedback handler:", error);
-    return c.text("Internal Server Error", 500);
+    return c.text("Internal Server Errorr", 500);
   }
 });
 
