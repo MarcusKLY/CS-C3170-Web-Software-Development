@@ -5,7 +5,7 @@
   </head>
   <body>
     <p>Add a course:</p>
-        <!-- Display validation errors if there are any -->
+    <!-- Display validation errors if there are any -->
     <% if (it?.errors) { %>
       <ul style="color: red;">
         <% if (it.errors.name?._errors) { %>
