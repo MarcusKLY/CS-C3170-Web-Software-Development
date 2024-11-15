@@ -8,8 +8,9 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 app.get("/", async (c) => {
   try {
+				let name =	{};
     // Retrieve the cookie value using getCookie
-    let name = getCookie(c.req.headers, "name");
+    name = getCookie(c.req.headers, "name");
 				return c.text(`Hello ${name || "xxxxxxx"}`);
 
     // Render the template
