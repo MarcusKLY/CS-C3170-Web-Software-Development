@@ -8,7 +8,7 @@ const app = new Hono();
 
 app.get("/courses/:courseId/feedbacks/:feedbackId", async (c) => {
   try {
-    const feedbackId = c.req.param("id");
+    const feedbackId = c.req.param("feedbackId");
     const courseId = c.req.param("courseId");
 
     if (!courseId && !feedbackId) {
