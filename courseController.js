@@ -10,13 +10,6 @@ import * as courseService from "./courseService.js";
 const sessionCounts = new Map();
 const secret = "secret";
 
-const getAndIncrementCount = (sessionId) => {
-  let count = sessionCounts.get(sessionId) ?? 0;
-  count++;
-  sessionCounts.set(sessionId, count);
-  return count;
-};
-
 const nameError = "The course name should be a string of at least 4 characters.";
 const courseValidator = z.object({
   name: z.string({ message: nameError }).min(4, { message: nameError }),
