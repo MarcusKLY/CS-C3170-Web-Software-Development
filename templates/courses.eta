@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>course</title>
+    <title>Courses</title>
   </head>
   <body>
-    <p>Add a course:</p>
-    <!-- Display validation errors if there are any -->
-    <% if (it && it.errors && it.errors.name && it.errors.name._errors) { %>
-      <ul style="color: red;">
-        <li>Name:
-          <ul>
-            <% it.errors.name._errors.forEach((error) => { %>
-              <li><%= error %></li>
-            <% }); %>
-          </ul>
-        </li>
+    <% if (it?.errors?.name?._errors) { %>
+      <p>Course name errors:</p>
+      <ul>
+        <% it?.errors?.name?._errors.forEach((error) => { %>
+        <li><%= error %></li>
+        <% }); %>
       </ul>
     <% } %>
-
+    <p>Add a course:</p>
     <form method="POST" action="/courses">
       <label for="name">Course name:</label>
-      <input type="text" id="name" name="name" value="<%= it.course?.name ? it.course.name : '' %>" /><br/>
+      <input type="text" id="name" name="name" value="<%= it?.name ?? '' %>" /><br/>
       <input type="submit" value="Add" />
     </form>
     <p>Existing courses:</p>
     <ul>
     <% it.courses.forEach((course) => { %>
       <li>
-        <a href="/courses/<%= course.courseId %>"><%= course.name %></a>
-        <form method="POST" action="/courses/<%= course.courseId %>/delete">
+        <a href="/courses/<%= course.id %>"><%= course.name %></a>
+        <form method="POST" action="/courses/<%= course.id %>/delete">
           <input type="submit" value="Delete" />
         </form>
       </li>
