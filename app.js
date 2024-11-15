@@ -9,10 +9,10 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 app.get("/", async (c) => {
   try {
     // Retrieve the cookie value using getCookie
-    let name = getCookie(c, "name");
+    let name = getCookie(c, "name") || "";
 
     // Render the template
-    return c.html(await eta.render("index.eta", { name }));
+    return c.html(await eta.render("index.eta", { name:name }));
 
   } catch (error) {
     console.error("Error in GET /:", error);
