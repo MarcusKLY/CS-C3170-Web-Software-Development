@@ -5,13 +5,13 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const showForm = async (c) => {
   return c.html(
-    eta.render("courses.eta", { books: await courseService.listTodos() }),
+    eta.render("courses.eta", { courses: await courseService.listCourses() }),
   );
 };
 
 const createCourse = async (c) => {
   const body = await c.req.parseBody();
-  await courseService.createTodo(body);
+  await courseService.createCourse(body);
   return c.redirect("/books");
 };
 
@@ -25,7 +25,7 @@ const showCourse = async (c) => {
 const updateCourse = async (c) => {
   const id = c.req.param("id");
   const body	= await c.req.parseBody();
-		await	courseService.updateTodo(id, body);
+		await	courseService.updateCourse(id, body);
 		return c.redirect(`/courses/${id}`);
 };
 
