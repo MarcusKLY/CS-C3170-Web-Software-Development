@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Feedback page</title>
+    <title>Hello forms!</title>
   </head>
   <body>
-    <p>How would you rate this experience?</p>
-    <form method="POST" action="/feedbacks/1">
-      <input type="submit" value="Poor"></input>
-    </form>
-    <form method="POST" action="/feedbacks/2">
-      <input type="submit" value="Fair"></input>
-    </form>
-    <form method="POST" action="/feedbacks/3">
-      <input type="submit" value="Good"></input>
-    </form>
-    <form method="POST" action="/feedbacks/4">
-      <input type="submit" value="Very good"></input>
-    </form>
-    <form method="POST" action="/feedbacks/5">
-      <input type="submit" value="Excellent"></input>
+    <form method="POST" action="/emails">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" /><br/>
+      <label for="yearOfBirth">Year of birth:</label>
+      <input type="number" id="yearOfBirth" name="yearOfBirth" /><br/>
+      <input type="submit" />
     </form>
   </body>
 </html>
