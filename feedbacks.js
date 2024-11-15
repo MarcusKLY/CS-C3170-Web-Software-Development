@@ -1,6 +1,7 @@
+const kv = await Deno.openKv(); // Open kv once and reuse it
+
 const getFeedbackCount = async (courseId, id) => {
   try {
-    const kv = await Deno.openKv();
     const store = await kv.get(["feedbacks", courseId, id]);
     return store?.value ?? 0;
   } catch (error) {
@@ -11,7 +12,6 @@ const getFeedbackCount = async (courseId, id) => {
 
 const incrementFeedbackCount = async (courseId, id) => {
   try {
-    const kv = await Deno.openKv();
     const count = await getFeedbackCount(courseId, id);
     await kv.set(["feedbacks", courseId, id], count + 1);
   } catch (error) {
