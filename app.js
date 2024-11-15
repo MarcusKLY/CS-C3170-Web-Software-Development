@@ -20,7 +20,7 @@ app.get("/courses/:courseId/feedbacks/:feedbackId", async (c) => {
     }
 
     // Fetch the feedback count; if the key doesn't exist, it should default to 0
-    const feedbackCount = await getFeedbackCount(courseId, feedbackId);
+    const feedbackCount = await feedbacks.getFeedbackCount(courseId, feedbackId);
     return c.text(`Feedback ${feedbackId}: ${feedbackCount}`);
   } catch (error) {
     console.error("Error in GET feedback handler:", error);
