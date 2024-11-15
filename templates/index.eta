@@ -6,23 +6,15 @@
 </head>
 
 <body>
-	<% if (it.name) { %>
-		<!-- Show greeting if the name is available -->
-		<p>Hi <%= it.name %>!</p>
+	<% if (name) { %>
+		<p>Hi <%= name %>!</p>
 		<% } else { %>
-			<!-- Show the form if the name is not available -->
-			<p>Add a name:</p>
-			<% if (it.error) { %>
-				<p style="color: red;">
-					<%= it.error %>
-				</p>
-				<% } %>
-					<form method="POST" action="/">
-						<label for="name">Type in your name:</label>
-						<input type="text" id="name" name="name" /><br />
-						<input type="submit" value="Submit" />
-					</form>
-					<% } %>
+			<form method="POST" action="/">
+				<label for="name">Type in your name:</label>
+				<input type="text" id="name" name="name" required /><br />
+				<input type="submit" />
+			</form>
+			<% } %>
 </body>
 
 </html>

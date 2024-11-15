@@ -9,39 +9,44 @@ const app = new Hono();
 
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
-// Handle GET request to render the form or show the greeting
-app.get('/', (c) => {
-  const name = getCookie(c.req, 'name'); // Get the cookie value for 'name'
-
-  if (name) {
-    // If name cookie is present, render greeting instead of form
-    return c.html(eta.render('index.eta', { name }));
-  } else {
-    // Render the form if the cookie is not set
-    return c.html(eta.render('index.eta', { name: null }));
-  }
+// Middleware to use Eta for rendering templates
+app.use("*", async (c, next) => {
+  c.set("render", async (template, data = {}) => {
+    const result = await eta.render(template, data);
+    c.header("Content-Type", "text/html");
+    c.res.body = result;
+  });
+  await next();
 });
 
-// Handle POST request to accept form data and set cookie
-app.post('/', async (c) => {
-  const body = await c.req.parseBody();
-  const name = body.name;
+// GET /
+app.get("/", async (c) => {
+  const name = getCookie(c.req.headers, "name");
+  if (name) {
+    // Show greeting if name exists
+    return c.render("index", { name });
+  }
+  // Show form otherwise
+  return c.render("index", { name: null });
+});
+
+// POST /
+app.post("/", async (c) => {
+  const formData = await c.req.parseBody();
+  const name = formData.name;
 
   if (name) {
-    // Set the cookie with the name value
-    setCookie(c, {
-      name: 'name',
+    // Store the name in a cookie
+    setCookie(c.res.headers, {
+      name: "name",
       value: name,
-      path: '/',
+      path: "/",
       httpOnly: true,
     });
-
-    // Redirect to the GET request to render the greeting
-    return c.redirect('/');
-  } else {
-    // If name is not provided, render the form again with an error message
-    return c.html(eta.render('index.eta', { name: null, error: "Name is required" }));
   }
+
+  // Redirect back to GET /
+  return c.redirect("/");
 });
 
 export default app;
