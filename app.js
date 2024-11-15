@@ -11,9 +11,8 @@ app.get("/", async (c) => {
     // Retrieve the cookie value using getCookie
     let name = getCookie(c, "name");
 				const rname = name;
-				return c.text(`Hello ${rname}`);
     // Render the template
-    return c.html(eta.render("index.eta", { name }));
+    return c.html(eta.render("index.eta", { rname }));
 
   } catch (error) {
     console.error("Error in GET /:", error);
