@@ -6,7 +6,6 @@ const eta = new Eta({ views: "templates" });
 
 const validator = z.object({
   email: z.string().email(),
-  yearOfBirth: z.coerce.number().min(1900).max(2030),
 });
 
 const app = new Hono();
@@ -20,11 +19,7 @@ app.post("/emails", async (c) => {
   const body = await c.req.parseBody();
   const validationResult = validator.safeParse(body);
   if (!validationResult.success) {
-    const html = await eta.render("index.eta", {
-      ...body,
-      error: "Not a valid email, try again.",
-    });
-    return c.html(html);
+    return c.text("Not a valid email, try again.");
   }
 
   return c.text("Valid email, thank you!");
