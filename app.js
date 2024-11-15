@@ -17,6 +17,8 @@ const getAndIncrementCount = (sessionId) => {
 
 app.get("/", async (c) => {
   try {
+			 const sessionId = await getSignedCookie(c, secret, "sessionId") ??
+    crypto.randomUUID();
     // Retrieve the cookie value using getCookie
 				const count = getAndIncrementCount(sessionId);
     // Render the template
