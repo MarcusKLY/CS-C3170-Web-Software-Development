@@ -34,7 +34,7 @@ const createCourse = async (c) => {
 
     // Render the form again with validation errors and user's input value retained
     return c.html(
-      eta.render("courses.eta", { errors, course }) // Make sure we are passing the course object containing user's input
+      eta.render("courses.eta", { courses, errors, course }) // Make sure we are passing the course object containing user's input
     );
   }
 
