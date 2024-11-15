@@ -12,7 +12,7 @@ app.get("/", async (c) => {
     let name = getCookie(c, "name");
 
     // Render the template
-    const html = await eta.render("index.eta", { name });
+    const html = await eta.render("index.eta", name	? { name } : {});
 
     // Return the response
     return c.html(html);
