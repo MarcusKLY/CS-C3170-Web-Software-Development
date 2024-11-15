@@ -11,7 +11,7 @@ const courseSchema = z.object({
 
 const showForm = async (c) => {
   return c.html(
-    eta.render("courses.eta", { courses: await courseService.listCourses() }),
+    eta.render("courses.eta", { courses: await courseService.listCourses(), errors: null, course: {} }),
   );
 };
 
@@ -34,7 +34,7 @@ const createCourse = async (c) => {
     });
 
     return c.html(
-      eta.render("courses.eta", { courses: await courseService.listCourses(), errors }),
+      eta.render("courses.eta", { courses: await courseService.listCourses(), errors, course }),
     );
   }
 
