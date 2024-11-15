@@ -21,7 +21,7 @@
       <% }); %>
     </ul>
     <% } %>
-    <% if (it?.isbn?.name?._errors) { %>
+    <% if (it?.errors?.isbn?._errors) { %>
     <p>ISBN validation errors:</p>
     <ul>
       <% it?.errors?.isbn?._errors.forEach((error) => { %>
