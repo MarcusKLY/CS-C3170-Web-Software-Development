@@ -1,6 +1,6 @@
 import { Eta } from "https://deno.land/x/eta@v3.4.0/src/index.ts";
 import { Hono } from "https://deno.land/x/hono@v3.12.11/mod.ts";
-import { getCookie, setCookie } from "https://deno.land/x/hono@v3.12.11/helper.ts";
+import { getCookie, setCookie } from "https://deno.land/x/hono@v3.12.11/helper/cookie.ts";
 
 const app = new Hono();
 
@@ -22,9 +22,9 @@ app.get("/", async (c) => {
 
 app.post("/", async (c) => {
   try {
-    // Parse the form data from the request
-    const formData = await c.req.parseBody();
-    const name = formData?.name;
+    // Parse form data from the request body
+    const body = await c.req.parseBody();
+    const name = body?.name;
 
     if (!name) {
       return c.text("Name is required", 400);
