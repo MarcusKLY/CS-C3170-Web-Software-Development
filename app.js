@@ -11,21 +11,23 @@ const validator = z.object({
 
 const app = new Hono();
 
-app.get("/", (c) => c.html(eta.render("index.eta")));
+app.get("/", async (c) => {
+  const html = await eta.render("index.eta");
+  return c.html(html);
+});
 
 app.post("/emails", async (c) => {
   const body = await c.req.parseBody();
   const validationResult = validator.safeParse(body);
   if (!validationResult.success) {
-    return c.html(
-      eta.render("index.eta", {
-        ...body,
-        errors: validationResult.error.format(),
-      }),
-    );
+    const html = await eta.render("index.eta", {
+      ...body,
+      error: "Not a valid email, try again.",
+    });
+    return c.html(html);
   }
 
-  return c.text("ok");
+  return c.text("Valid email, thank you!");
 });
 
 Deno.serve(app.fetch);
