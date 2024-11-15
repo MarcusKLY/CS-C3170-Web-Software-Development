@@ -1,13 +1,13 @@
-const getFeedbackCount = async (id) => {
+const getFeedbackCount = async (courseID, id) => {
   const kv = await Deno.openKv();
-  const store = await kv.get(["feedbacks", id]);
+  const store = await kv.get(["feedbacks", courseID, id]);
   return store?.value ?? 0;
 };
 
-const incrementFeedbackCount = async (id) => {
+const incrementFeedbackCount = async (courseID, id) => {
   const kv = await Deno.openKv();
-  const count = await getFeedbackCount(id);
-  await kv.set(["feedbacks", id], count + 1);
+  const count = await getFeedbackCount(courseID, id);
+  await kv.set(["feedbacks", courseID, id], count + 1);
 };
 
 export { getFeedbackCount, incrementFeedbackCount };

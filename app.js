@@ -7,15 +7,16 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 const app = new Hono();
 
 app.get("/courses/:courseId/feedbacks/:id", async (c) => {
-  const id = c.req.param("id");
-  const feedbackCount = await feedbacks.getFeedbackCount(id);
+  const id = c.req.params.id;
+  const courseId = c.req.params.courseId;
+  const feedbackCount = await feedbacks.getFeedbackCount(courseId, id);
   return c.text(`Feedback ${id}: ${feedbackCount}`);
 });
 
 app.post("/courses/:courseId/feedbacks/:id", async (c) => {
   const id = c.req.params.id;
   const courseId = c.req.params.courseId;
-  await feedbacks.incrementFeedbackCount(id);
+  await feedbacks.incrementFeedbackCount(courseId, id);
   return c.redirect(`/courses/${courseId}`);
 });
 
