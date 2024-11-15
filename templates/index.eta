@@ -7,7 +7,7 @@
     <% if (it.count > 3) { %>
       <p>To see more, register and pay up!</p>
     <% } else { %>
-						<p>Hello! Here is the paywalled content.</p>
+      <p>Hello! Here is the paywalled content. <%= it.count %></p>
     <% } %>
   </body>
 </html>
