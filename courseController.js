@@ -41,18 +41,20 @@ const showCourse = async (c) => {
   try {
     const id = c.req.param("id");
     const sessionId = await getSignedCookie(c, secret, "sessionId") ?? crypto.randomUUID();
-    const count = getSignedCookie(c, secret, "count") ?? 0;
-    return await c.text(`Course ${id}: ${count}`);
-    const course = await courseService.getCourse(id);
+    const count = getAndIncrementCount(sessionId, id);
 
-    return c.html(
-      eta.render("course.eta", { course, count }),
-    );
+    const course = await courseService.getCourse(id);
+    return await c.text(`Course ${id}: ${count}`);
+
+    const renderedHtml = await eta.render("course.eta", { course, count });
+
+    return c.html(renderedHtml);
   } catch (error) {
     console.error("Error in showCourse:", error);
     return c.text(`Internal Server Error: ${error}`, 500);
   }
 };
+
 
 
 
