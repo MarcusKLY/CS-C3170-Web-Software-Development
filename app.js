@@ -56,4 +56,5 @@ app.get("/courses/:id", courseController.showCourse);
 app.post("/courses", courseController.createCourse);
 app.post("/courses/:id/delete", courseController.deleteCourse);
 
+export { getAndIncrementCount };
 export default app;
