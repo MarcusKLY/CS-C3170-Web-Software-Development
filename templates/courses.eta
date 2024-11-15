@@ -5,13 +5,19 @@
   </head>
   <body>
     <p>Add a course:</p>
-    <% if (it?.errors?.name?._errors) { %>
-    <p>Name validation errors:</p>
-    <ul>
-      <% it?.errors?.name?._errors.forEach((error) => { %>
-      <li><%= error %></li>
-      <% }); %>
-    </ul>
+        <!-- Display validation errors if there are any -->
+    <% if (it?.errors) { %>
+      <ul style="color: red;">
+        <% if (it.errors.name?._errors) { %>
+          <li>Name:
+            <ul>
+              <% it.errors.name._errors.forEach((error) => { %>
+                <li><%= error %></li>
+              <% }); %>
+            </ul>
+          </li>
+        <% } %>
+      </ul>
     <% } %>
     <form method="POST" action="/courses">
       <label for="name">Course name:</label>

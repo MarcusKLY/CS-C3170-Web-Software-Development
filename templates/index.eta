@@ -5,46 +5,33 @@
   </head>
   <body>
     <!-- Display course name -->
-    <h1>Course: <%= it.course?.name || "Unknown Course" %></h1>
+    <h1>Course: <%= it.course.name %></h1>
 
-    <!-- Display validation errors if there are any -->
-    <% if (it?.errors) { %>
-      <ul style="color: red;">
-        <% if (it.errors.name?._errors) { %>
-          <li>Name:
-            <ul>
-              <% it.errors.name._errors.forEach((error) => { %>
-                <li><%= error %></li>
-              <% }); %>
-            </ul>
-          </li>
-        <% } %>
-      </ul>
-    <% } %>
+    <!-- Feedback prompt -->
+    <p>How would you rate this experience?</p>
 
     <!-- Update course form -->
-    <form method="POST" action="/courses/<%= it.course?.courseId %>">
+    <form method="POST" action="/courses/<%= it.course.courseId %>">
       <label for="name">Course name:</label>
-      <input type="text" id="name" name="name" value="<%= it.course?.name ? it.course.name : '' %>" /><br />
+      <input type="text" id="name" name="name" value="<%= it.course?.name || '' %>" /><br />
       <input type="submit" value="Update course" />
     </form>
 
-
     <!-- Feedback buttons for rating the course -->
     <p>How would you rate this course?</p>
-    <form method="POST" action="/courses/<%= it.course?.courseId %>/feedbacks/1">
+    <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/1">
       <input type="submit" value="Poor"></input>
     </form>
-    <form method="POST" action="/courses/<%= it.course?.courseId %>/feedbacks/2">
+    <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/2">
       <input type="submit" value="Fair"></input>
     </form>
-    <form method="POST" action="/courses/<%= it.course?.courseId %>/feedbacks/3">
+    <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/3">
       <input type="submit" value="Good"></input>
     </form>
-    <form method="POST" action="/courses/<%= it.course?.courseId %>/feedbacks/4">
+    <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/4">
       <input type="submit" value="Very good"></input>
     </form>
-    <form method="POST" action="/courses/<%= it.course?.courseId %>/feedbacks/5">
+    <form method="POST" action="/courses/<%= it.course.courseId %>/feedbacks/5">
       <input type="submit" value="Excellent"></input>
     </form>
 
