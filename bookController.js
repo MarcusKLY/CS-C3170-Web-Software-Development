@@ -25,7 +25,16 @@ const createBook = async (c) => {
   const validationResult = bookSchema.safeParse(book);
 
   if (!validationResult.success) {
-    const errors = validationResult.error.errors.map((e) => e.message);
+    // Map the errors to match the expected structure in your template
+    const errors = {};
+    validationResult.error.errors.forEach((e) => {
+      const field = e.path[0];
+      if (!errors[field]) {
+        errors[field] = { _errors: [] };
+      }
+      errors[field]._errors.push(e.message);
+    });
+
     // Render the form again with validation errors and the current input values
     return c.html(
       eta.render("books.eta", { books: await bookService.listBooks(), errors, book }),

@@ -5,13 +5,30 @@
   </head>
   <body>
     <p>Add a book:</p>
-    <% if (errors && errors.length > 0) { %>
-      <ul style="color: red;">
-        <% errors.forEach((error) => { %>
-          <li><%= error %></li>
-        <% }); %>
-      </ul>
+    <% if (it?.errors?.name?._errors) { %>
+    <p>Name validation errors:</p>
+    <ul>
+      <% it?.errors?.name?._errors.forEach((error) => { %>
+      <li><%= error %></li>
+      <% }); %>
+    </ul>
     <% } %>
+    <% if (it?.errors?.pages?._errors) { %>
+    <p>Pages validation errors:</p>
+    <ul>
+      <% it?.errors?.pages?._errors.forEach((error) => { %>
+      <li><%= error %></li>
+      <% }); %>
+    </ul>
+    <% } %>
+    <% if (it?.isbn?.name?._errors) { %>
+    <p>ISBN validation errors:</p>
+    <ul>
+      <% it?.errors?.isbn?._errors.forEach((error) => { %>
+      <li><%= error %></li>
+      <% }); %>
+    </ul>
+    <% } %>        
     <form method="POST" action="/books">
       <label for="name">Book name:</label>
       <input type="text" id="name" name="name" /><br/>
