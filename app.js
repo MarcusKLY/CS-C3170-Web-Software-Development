@@ -10,10 +10,9 @@ app.get("/", async (c) => {
   try {
     // Retrieve the cookie value using getCookie
     let name = getCookie(c, "name");
-				return c.text(name);
 
     // Render the template
-    const html = await eta.render("index.eta", {name: name || "xxxxxxx"});
+    const html = await eta.render("index.eta", { name });
 
     // Return the response
     return c.html(html);
