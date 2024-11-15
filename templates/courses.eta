@@ -6,22 +6,21 @@
   <body>
     <p>Add a course:</p>
     <!-- Display validation errors if there are any -->
-    <% if (it?.errors) { %>
+    <% if (it && it.errors && it.errors.name && it.errors.name._errors) { %>
       <ul style="color: red;">
-        <% if (it.errors.name?._errors) { %>
-          <li>Name:
-            <ul>
-              <% it.errors.name._errors.forEach((error) => { %>
-                <li><%= error %></li>
-              <% }); %>
-            </ul>
-          </li>
-        <% } %>
+        <li>Name:
+          <ul>
+            <% it.errors.name._errors.forEach((error) => { %>
+              <li><%= error %></li>
+            <% }); %>
+          </ul>
+        </li>
       </ul>
     <% } %>
+
     <form method="POST" action="/courses">
       <label for="name">Course name:</label>
-      <input type="text" id="name" name="name" /><br/>
+      <input type="text" id="name" name="name" value="<%= it.course?.name ? it.course.name : '' %>" /><br/>
       <input type="submit" value="Add" />
     </form>
     <p>Existing courses:</p>

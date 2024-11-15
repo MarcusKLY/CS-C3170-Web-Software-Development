@@ -15,32 +15,39 @@ const showForm = async (c) => {
 
 
 const createCourse = async (c) => {
-  const body = await c.req.parseBody();
-  const course = {
-    name: body.name || "",  // Ensure the name is set or defaults to an empty string
-  };
+  try {
+    const body = await c.req.parseBody();
+    const course = {
+      name: body.name || "", // Ensure the name is set or defaults to an empty string
+    };
 
-  const validationResult = courseSchema.safeParse(course);
+    // Validate the input
+    const validationResult = courseSchema.safeParse(course);
 
-  if (!validationResult.success) {
-    const errors = {};
-    validationResult.error.errors.forEach((e) => {
-      const field = e.path[0];
-      if (!errors[field]) {
-        errors[field] = { _errors: [] };
-      }
-      errors[field]._errors.push(e.message);
-    });
+    if (!validationResult.success) {
+      const errors = {};
+      validationResult.error.errors.forEach((e) => {
+        const field = e.path[0];
+        if (!errors[field]) {
+          errors[field] = { _errors: [] };
+        }
+        errors[field]._errors.push(e.message);
+      });
 
-    // Render the form again with validation errors and user's input value retained
-    return c.html(
-      eta.render("courses.eta", { courses, errors, course }) // Make sure we are passing the course object containing user's input
-    );
+      // Render the form again with validation errors and user's input value retained
+      const courses = await courseService.listCourses();
+      return c.html(
+        eta.render("courses.eta", { courses, errors, course }) // Make sure we are passing the course object containing user's input
+      );
+    }
+
+    // If validation succeeds
+    await courseService.createCourse(course);
+    return c.redirect("/courses");
+  } catch (err) {
+    console.error("Error occurred during course creation:", err);
+    return c.html("Internal server error", 500); // Send a 500 status code in case of an error
   }
-
-  // If validation succeeds
-  await courseService.createCourse(course);
-  return c.redirect("/courses");
 };
 
 
