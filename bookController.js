@@ -2,7 +2,6 @@ import { Eta } from "https://deno.land/x/eta@v3.4.0/src/index.ts";
 import * as bookService from "./bookService.js";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
-
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const bookSchema = z.object({
@@ -12,16 +11,23 @@ const bookSchema = z.object({
   isbn: z.string().length(13, "The ISBN should be a string of 13 characters.")
 });
 
+// Show form for adding a new book
 const showForm = async (c) => {
   return c.html(
-    eta.render("books.eta", { books: await bookService.listBooks() }),
+    eta.render("books.eta", { books: await bookService.listBooks(), errors: null, book: {} }),
   );
 };
 
+// Create a new book, with validation
 const createBook = async (c) => {
   const body = await c.req.parseBody();
-  const book = { name: body.name, pages: Number(body.pages), isbn: body.isbn };
+  const book = {
+    name: body.name,
+    pages: Number(body.pages), // Ensure pages is treated as a number
+    isbn: body.isbn,
+  };
 
+  // Validate using Zod
   const validationResult = bookSchema.safeParse(book);
 
   if (!validationResult.success) {
@@ -46,6 +52,7 @@ const createBook = async (c) => {
   return c.redirect("/books");
 };
 
+// Show details of a single book
 const showBook = async (c) => {
   const id = c.req.param("id");
   return c.html(
@@ -53,6 +60,7 @@ const showBook = async (c) => {
   );
 };
 
+// Update an existing book
 const updateBook = async (c) => {
   const id = c.req.param("id");
   const body = await c.req.parseBody();
@@ -60,6 +68,7 @@ const updateBook = async (c) => {
   return c.redirect(`/books/${id}`);
 };
 
+// Delete a book
 const deleteBook = async (c) => {
   const id = c.req.param("id");
   await bookService.deleteBook(id);
