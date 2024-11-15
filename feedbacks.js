@@ -23,3 +23,5 @@ const incrementFeedbackCount = async (courseId, feedbackId) => {
     throw new Error("Could not increment feedback count.");
   }
 };
+
+export { getFeedbackCount, incrementFeedbackCount };
