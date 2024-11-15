@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>course</title>
+    <title>Courses</title>
   </head>
   <body>
-    <p>Add a course:</p>
-    <!-- Display validation errors if there are any -->
-    <% if (it && it.errors && it.errors.name && it.errors.name._errors) { %>
-      <ul style="color: red;">
-        <li>Name:
-          <ul>
-            <% it.errors.name._errors.forEach((error) => { %>
-              <li><%= error %></li>
-            <% }); %>
-          </ul>
-        </li>
+    <% if (it?.errors?.name?._errors) { %>
+      <p>Course name errors:</p>
+      <ul>
+        <% it?.errors?.name?._errors.forEach((error) => { %>
+        <li><%= error %></li>
+        <% }); %>
       </ul>
     <% } %>
 
@@ -27,8 +22,8 @@
     <ul>
     <% it.courses.forEach((course) => { %>
       <li>
-        <a href="/courses/<%= course.courseId %>"><%= course.name %></a>
-        <form method="POST" action="/courses/<%= course.courseId %>/delete">
+        <a href="/courses/<%= course.id %>"><%= course.name %></a>
+        <form method="POST" action="/courses/<%= course.id %>/delete">
           <input type="submit" value="Delete" />
         </form>
       </li>
