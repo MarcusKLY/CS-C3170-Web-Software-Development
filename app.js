@@ -7,17 +7,27 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 const app = new Hono();
 
 app.get("/courses/:courseId/feedbacks/:id", async (c) => {
-  const id = c.req.params.id;
-  const courseId = c.req.params.courseId;
-  const feedbackCount = await feedbacks.getFeedbackCount(courseId, id);
-  return c.text(`Feedback ${id}: ${feedbackCount}`);
+  try {
+    const id = c.req.params.id;
+    const courseId = c.req.params.courseId;
+    const feedbackCount = await feedbacks.getFeedbackCount(courseId, id);
+    return c.text(`Feedback ${id}: ${feedbackCount}`);
+  } catch (error) {
+    console.error("Error in GET feedback handler:", error);
+    return c.text("Internal Server Error", 500);
+  }
 });
 
 app.post("/courses/:courseId/feedbacks/:id", async (c) => {
-  const id = c.req.params.id;
-  const courseId = c.req.params.courseId;
-  await feedbacks.incrementFeedbackCount(courseId, id);
-  return c.redirect(`/courses/${courseId}`);
+  try {
+    const id = c.req.params.id;
+    const courseId = c.req.params.courseId;
+    await feedbacks.incrementFeedbackCount(courseId, id);
+    return c.redirect(`/courses/${courseId}`);
+  } catch (error) {
+    console.error("Error in POST feedback handler:", error);
+    return c.text("Internal Server Error", 500);
+  }
 });
 
 app.get("/courses", courseController.showForm);
