@@ -29,7 +29,8 @@ app.post("/", async (c) => {
 			const name = formData.name;
 			// Set the cookie value using setCookie
 			setCookie(c, "name", name);
-			return c.text(`Cookie set ${name}`);
+			let ee = getCookie(c, "name");
+			return c.text(`Cookie set ${ee}`);
 			// Redirect to the home page
 			return c.redirect("/");
   } catch (error) {
