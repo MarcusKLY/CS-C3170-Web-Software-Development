@@ -12,7 +12,7 @@ app.get("/", async (c) => {
     let name = getCookie(c, "name");
 				const rname = name;
     // Render the template
-    return c.html(eta.render("index.eta", { rname }));
+    return c.html(await eta.render("index.eta", { rname }));
 
   } catch (error) {
     console.error("Error in GET /:", error);
