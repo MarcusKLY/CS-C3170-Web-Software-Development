@@ -25,7 +25,7 @@ app.get("/", async (c) => {
 app.post("/", async (c) => {
   try {
 			// Retrieve the name from the request body
-			const name = await c.req.param("name");
+			const name = c.req.param("name");
 			return c.text(`${name}`, 500);
 			// Set the cookie value using setCookie
 			setCookie(c, "name", name);
