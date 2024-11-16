@@ -44,13 +44,11 @@ const loginUser = async (c) => {
   }
 
   const passwordsMatch = scrypt.verify(body.password, user.passwordHash);
-
   if (!passwordsMatch) {
     return c.text(`Incorrect password.`);
   }
 
   await sessionService.createSession(c, user);
-  
   return c.redirect("/");
 };
 
