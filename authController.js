@@ -1,6 +1,11 @@
 import { Eta } from "https://deno.land/x/eta@v3.4.0/src/index.ts";
 import * as scrypt from "https://deno.land/x/scrypt@v4.3.4/mod.ts";
 import * as userService from "./userService.js";
+import {
+  deleteCookie,
+  getSignedCookie,
+  setSignedCookie,
+} from "https://deno.land/x/hono@v3.12.11/helper.ts";
 
 const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
@@ -25,7 +30,7 @@ const registerUser = async (c) => {
 
   await userService.createUser(user);
 
-  return c.text(JSON.stringify(body));
+  return c.redirect("/");
 };
 
 const loginUser = async (c) => {
@@ -44,7 +49,26 @@ const loginUser = async (c) => {
 
   await sessionService.createSession(c, user);
   
-  return c.text(JSON.stringify(body));
+  return c.redirect("/");
 };
 
-export { registerUser, showRegistrationForm,	loginUser};
+const logoutUser = async (c) => {
+  await sessionService.deleteSession(c);
+  return c.redirect("/");
+};
+
+const deleteSession = async (c) => {
+  const sessionId = await getSignedCookie(c, secret, "sessionId");
+  if (!sessionId) {
+    return;
+  }
+
+  deleteCookie(c, "sessionId", {
+    path: "/",
+  });
+
+  const kv = await Deno.openKv();
+  await kv.delete(["sessions", sessionId]);
+};
+
+export { registerUser, showRegistrationForm,	loginUser, logoutUser, deleteSession };

@@ -8,6 +8,7 @@ app.get("/auth/login", authController.showLoginForm);
 app.post("/auth/login", authController.loginUser);
 app.get("/auth/registration", authController.showRegistrationForm);
 app.post("/auth/registration", authController.registerUser);
+app.post("/auth/logout", authController.logoutUser);
 
 app.get("/", mainController.showMain);
 
