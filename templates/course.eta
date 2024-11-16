@@ -4,7 +4,7 @@
     <title>Course</title>
   </head>
   <body>
-    <% if (it.count > 1) { %>
+    <% if (it.count = 1) { %>
       <p>You have already given feedback for this course. Thank you!</p>
     <% } else { %>
           <p><%= it.course.name %></p>
