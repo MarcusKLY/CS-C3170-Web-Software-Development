@@ -47,4 +47,4 @@ const loginUser = async (c) => {
   return c.text(JSON.stringify(body));
 };
 
-export { registerUser, showRegistrationForm,	loginUser };
+export { registerUser, showRegistrationForm,	loginUser};
