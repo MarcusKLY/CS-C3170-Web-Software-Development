@@ -11,6 +11,8 @@ const eta = new Eta({ views: `${Deno.cwd()}/templates/` });
 
 const showRegistrationForm = (c) => c.html(eta.render("registration.eta"));
 
+const showLoginForm = (c) => c.html(eta.render("login.eta"));
+
 const registerUser = async (c) => {
   const body = await c.req.parseBody();
   if (body.password !== body.verification) {
@@ -71,4 +73,4 @@ const deleteSession = async (c) => {
   await kv.delete(["sessions", sessionId]);
 };
 
-export { registerUser, showRegistrationForm,	loginUser, logoutUser, deleteSession };
+export { registerUser, showRegistrationForm,	loginUser, logoutUser, deleteSession,	showLoginForm };
