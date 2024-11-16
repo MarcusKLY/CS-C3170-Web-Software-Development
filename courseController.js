@@ -44,7 +44,7 @@ const showCourse = async (c) => {
     const sessionId = await getSignedCookie(c, secret, "sessionId") ?? crypto.randomUUID();
     const count = await getCount(sessionId, id);
     const course = await courseService.getCourse(id);
-
+    return c.text(`count: ${count}`);
     const renderedHtml = await eta.render("course.eta", { course, count });
 
     return c.html(renderedHtml);
