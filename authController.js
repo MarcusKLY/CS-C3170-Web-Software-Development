@@ -31,23 +31,32 @@ const registerUser = async (c) => {
 const showLoginForm = (c) => c.html(eta.render("login.eta"));
 
 const loginUser = async (c) => {
-  const body = await c.req.parseBody();
-  console.log(body);
+  try {
+    const body = await c.req.parseBody();
+    console.log(body);
 
-  const user = await userService.findUserByEmail(body.email);
-  if (!user) {
-    return c.text(`No user with the email ${body.email} exists.`);
+    // Find the user by email
+    const user = await userService.findUserByEmail(body.email);
+    if (!user) {
+      return c.text(`No user with the email ${body.email} exists.`);
+    }
+
+    // Verify the password
+    const passwordsMatch = await scrypt.verify(body.password, user.passwordHash);
+    if (!passwordsMatch) {
+      return c.text(`Incorrect password.`);
+    }
+
+    // Create a new session for the user
+    await sessionService.createSession(c, user);
+
+    // Redirect after successful login
+    return c.redirect("/");
+  } catch (error) {
+    console.error("Error during login:", error);
+    // Handle the error and return a response to the user
+    return c.text(`Internal Server Error: ${error.message}`, 500);
   }
-
-  const passwordsMatch = scrypt.verify(body.password, user.passwordHash);
-
-  if (!passwordsMatch) {
-    return c.text(`Incorrect password.`);
-  }
-  
-		await sessionService.createSession(c, user);
-
-  return c.redirect("/");
 };
 
 const logoutUser = async (c) => {
