@@ -12,4 +12,4 @@ app.post("/auth/logout", authController.logoutUser);
 
 app.get("/", mainController.showMain);
 
-Deno.serve(app.fetch);
+export	default app;
