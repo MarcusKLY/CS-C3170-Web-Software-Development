@@ -28,4 +28,23 @@ const registerUser = async (c) => {
   return c.text(JSON.stringify(body));
 };
 
-export { registerUser, showRegistrationForm };
+const loginUser = async (c) => {
+  const body = await c.req.parseBody();
+
+  const user = await userService.findUserByEmail(body.email);
+  if (!user) {
+    return c.text(`No user with the email ${body.email} exists.`);
+  }
+
+  const passwordsMatch = scrypt.verify(body.password, user.passwordHash);
+
+  if (!passwordsMatch) {
+    return c.text(`Incorrect password.`);
+  }
+
+  await sessionService.createSession(c, user);
+  
+  return c.text(JSON.stringify(body));
+};
+
+export { registerUser, showRegistrationForm,	loginUser };
