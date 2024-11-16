@@ -5,8 +5,6 @@ import {
 
 const secret = "secret";
 
-const WEEK_IN_MILLISECONDS = 604800000;
-
 const createSession = async (c, user) => {
   const sessionId = crypto.randomUUID();
   await setSignedCookie(c, "sessionId", sessionId, secret, {
@@ -14,29 +12,34 @@ const createSession = async (c, user) => {
   });
 
   const kv = await Deno.openKv();
-  await kv.set(["sessions", sessionId], user, {
-    expireIn: WEEK_IN_MILLISECONDS,
-  });
+  await kv.set(["sessions", sessionId], user);
 };
 
 const getUserFromSession = async (c) => {
   const sessionId = await getSignedCookie(c, secret, "sessionId");
   if (!sessionId) {
+    console.log("No such session.");
     return null;
   }
 
   const kv = await Deno.openKv();
   const user = await kv.get(["sessions", sessionId]);
-  const foundUser = user?.value ?? null;
-  if (!foundUser) {
-    return null;
-  }
-
-  await kv.set(["sessions", sessionId], foundUser, {
-    expireIn: WEEK_IN_MILLISECONDS,
-  });
-
-  return foundUser;
+  return user?.value ?? null;
 };
 
-export { createSession, getUserFromSession };
+const deleteSession = async (c) => {
+  const sessionId = await getSignedCookie(c, secret, "sessionId");
+  if (!sessionId) {
+    return;
+  }
+
+  deleteCookie(c, "sessionId", {
+    path: "/",
+  });
+
+  const kv = await Deno.openKv();
+  await kv.delete(["sessions", sessionId]);
+};
+
+
+export { createSession,	getUserFromSession, deleteSession };

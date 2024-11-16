@@ -24,8 +24,8 @@ const registerUser = async (c) => {
   };
 
   await userService.createUser(user);
-
-  return c.text(JSON.stringify(body));
+  await sessionService.createSession(c, user);
+  return c.redirect("/");
 };
 
 const showLoginForm = (c) => c.html(eta.render("login.eta"));
@@ -40,11 +40,19 @@ const loginUser = async (c) => {
   }
 
   const passwordsMatch = scrypt.verify(body.password, user.passwordHash);
+
   if (!passwordsMatch) {
     return c.text(`Incorrect password.`);
   }
   
-  return c.text(JSON.stringify(body));
+		await sessionService.createSession(c, user);
+
+  return c.redirect("/");
 };
 
-export { registerUser, showRegistrationForm,	showLoginForm, loginUser };
+const logoutUser = async (c) => {
+  await sessionService.deleteSession(c);
+  return c.redirect("/");
+};
+
+export { registerUser, showRegistrationForm,	showLoginForm, loginUser,	logoutUser };
