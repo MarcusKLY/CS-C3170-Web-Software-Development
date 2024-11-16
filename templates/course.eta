@@ -7,7 +7,8 @@
     <% if (it.count = 1) { %>
       <p>You have already given feedback for this course. Thank you!</p>
     <% } else { %>
-          <p><%= it.course.name %></p>
+    <p><%= it.ccount %></p>
+    <p><%= it.course.name %></p>
     <p>How would you rate this experience?</p>
     <form method="POST" action="/courses/<%= it.course.id %>/feedbacks/1">
       <input type="submit" value="Poor"></input>
