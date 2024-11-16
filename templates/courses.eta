@@ -4,18 +4,10 @@
     <title>Courses</title>
   </head>
   <body>
-    <% if (it?.errors?.name?._errors) { %>
-      <p>Course name errors:</p>
-      <ul>
-        <% it?.errors?.name?._errors.forEach((error) => { %>
-        <li><%= error %></li>
-        <% }); %>
-      </ul>
-    <% } %>
     <p>Add a course:</p>
     <form method="POST" action="/courses">
       <label for="name">Course name:</label>
-      <input type="text" id="name" name="name" value="<%= it?.name ?? '' %>" /><br/>
+      <input type="text" id="name" name="name" /><br/>
       <input type="submit" value="Add" />
     </form>
     <p>Existing courses:</p>
