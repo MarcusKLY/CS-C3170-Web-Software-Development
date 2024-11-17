@@ -1,13 +1,13 @@
-const createTodo = async (todo) => {
+const createTodo = async (userId, todo) => {
   todo.id = crypto.randomUUID();
 
   const kv = await Deno.openKv();
-  await kv.set(["todos", todo.id], todo);
+  await kv.set(["todos", userId, todo.id], todo);
 };
 
-const listTodos = async () => {
+const listTodos = async (userId) => {
   const kv = await Deno.openKv();
-  const todoEntries = await kv.list({ prefix: ["todos"] });
+  const todoEntries = await kv.list({ prefix: ["todos", userId] });
 
   const todos = [];
   for await (const entry of todoEntries) {
@@ -17,21 +17,21 @@ const listTodos = async () => {
   return todos;
 };
 
-const getTodo = async (id) => {
+const getTodo = async (userId, id) => {
   const kv = await Deno.openKv();
-  const todo = await kv.get(["todos", id]);
+  const todo = await kv.get(["todos", userId, id]);
   return todo?.value ?? {};
 };
 
-const updateTodo = async (id, todo) => {
+const updateTodo = async (userId, id, todo) => {
   todo.id = id;
   const kv = await Deno.openKv();
-  await kv.set(["todos", id], todo);
+  await kv.set(["todos", userId, id], todo);
 };
 
-const deleteTodo = async (id) => {
+const deleteTodo = async (userId, id) => {
   const kv = await Deno.openKv();
-  await kv.delete(["todos", id]);
+  await kv.delete(["todos", userId, id]);
 };
 
 export { createTodo, deleteTodo, getTodo, listTodos, updateTodo };

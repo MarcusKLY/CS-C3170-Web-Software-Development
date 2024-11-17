@@ -3,7 +3,12 @@ import * as authController from "./authController.js";
 import * as todoController from "./todoController.js";
 import * as mainController from "./mainController.js";
 
+import * as middlewares from "./middlewares.js";
+
 const app = new Hono();
+
+app.use("*", middlewares.addUserToContextMiddleware);
+app.use("/todos/*", middlewares.accessControlMiddleware);
 
 app.get("/auth/login", authController.showLoginForm);
 app.post("/auth/login", authController.loginUser);
